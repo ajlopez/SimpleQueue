@@ -17,7 +17,7 @@ function Consumer(queue) {
             if (err) {
                 console.log(err);
             }
-            else {
+            else if (msg != null) {
                 console.log('Processing ' + msg.payload);
             }
             
