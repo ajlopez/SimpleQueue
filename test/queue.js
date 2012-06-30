@@ -4,67 +4,45 @@ var Queue = simplequeue.Queue;
 var Message = simplequeue.Message;
 
 exports['Get null Message from empty Queue']= function(test) {
-    test.expect(2);
     var queue = new Queue();    
     
-    queue.getMessage(function(err, msg) {
-        test.equal(err, undefined);
-        test.equal(msg, null);
-        test.done();
-    });
+    test.equal(queue.getMessage(), null);
+    test.done();
 }
 
 exports['Put Message in Queue']= function(test) {
-    test.expect(2);
-    var queue = new Queue();        
-    
-    queue.putMessage(new Message("foo"), function(err, result) {
-        test.equal(err, undefined);
-        test.equal(result, true);
-        test.done();
-    });
-}
-
-exports['Put ang get Message from Queue']= function(test) {
-    test.expect(4);
     var queue = new Queue();        
     
     queue.putMessage(new Message("foo"));
-    
-    queue.getMessage(function(err, msg) {
-        test.equal(err, undefined);
-        test.ok(msg);
-        test.ok(msg.payload);
-        test.ok(msg.payload, "foo");
-        test.done();
-    });
+    test.done();
 }
 
-exports['Put ang get two Messages from Queue']= function(test) {
-    test.expect(10);
+exports['Put ang get Message from Queue']= function(test) {
+    var queue = new Queue();        
+    
+    queue.putMessage(new Message("foo"));
+    var msg = queue.getMessage();
+    
+    test.ok(msg);
+    test.ok(msg.payload);
+    test.equal(msg.payload, "foo");
+    test.done();
+}
+
+exports['Put and get two Messages from Queue']= function(test) {
     var queue = new Queue();        
     
     queue.putMessage(new Message("foo"));
     queue.putMessage(new Message("bar"));
     
-    queue.getMessage(function(err, msg) {
-        test.equal(err, undefined);
-        test.ok(msg);
-        test.ok(msg.payload);
-        test.ok(msg.payload, "foo");
-        
-        queue.getMessage(function(err, msg) {
-            test.equal(err, undefined);
-            test.ok(msg);
-            test.ok(msg.payload);
-            test.ok(msg.payload, "bar");
-            
-            queue.getMessage(function(err, msg) {
-                test.equal(err, undefined);
-                test.equal(msg, null);
-                test.done();
-            });
-        });
-    });
+    var msg1 = queue.getMessage();
+    var msg2 = queue.getMessage();
+    
+    test.ok(msg1);
+    test.equal(msg1.payload, "foo");
+    test.ok(msg2);
+    test.equal(msg2.payload, "bar");
+    
+    test.done();
 }
 
