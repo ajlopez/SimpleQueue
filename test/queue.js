@@ -14,6 +14,17 @@ exports['Get null Message from empty Queue']= function(test) {
     });
 }
 
+exports['Put Message in Queue']= function(test) {
+    test.expect(2);
+    var queue = new Queue();        
+    
+    queue.putMessage(new Message("foo"), function(err, result) {
+        test.equal(err, undefined);
+        test.equal(result, true);
+        test.done();
+    });
+}
+
 exports['Put ang get Message from Queue']= function(test) {
     test.expect(4);
     var queue = new Queue();        
@@ -28,7 +39,6 @@ exports['Put ang get Message from Queue']= function(test) {
         test.done();
     });
 }
-
 
 exports['Put ang get two Messages from Queue']= function(test) {
     test.expect(10);
