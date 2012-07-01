@@ -46,3 +46,29 @@ exports['Put and get two Messages from Queue']= function(test) {
     test.done();
 }
 
+exports['Consume Queue']= function(test) {
+    test.expect(7);
+    
+    var queue = new Queue();        
+    
+    queue.putMessage(new Message(1));
+    queue.putMessage(new Message(2));
+    queue.putMessage(new Message(3));
+    
+    var sum = 0;
+    
+    simplequeue.consume(queue, function(msg) {
+        test.ok(msg);
+        test.ok(msg.payload);
+        sum += msg.payload;
+        
+        if (msg.payload != 3)
+            return true;
+            
+        test.equal(sum, 6);
+        test.done();
+        
+        return false;
+    });
+}
+
