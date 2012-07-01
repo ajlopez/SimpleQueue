@@ -1,6 +1,6 @@
 # SimpleQueue
 
-Simple in-memory, distributed Queue for Node.js.
+Simple in-memory queue for Node.js. It can be accessed by remote clients.
 
 ## Installation
 
