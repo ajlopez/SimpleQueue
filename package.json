@@ -1,7 +1,7 @@
 { "name": "simplequeue"
 , "description": "Simple In-memory Distributed Queue for Node.js"
 , "keywords": [ "queue", "distributed", "nodejs", "javascript" ]
-, "version": "0.0.1alpha"
+, "version": "0.0.1"
 , "author": "Angel 'Java' Lopez <webmaster@ajlopez.com> (http://www.ajlopez.com)"
 , "repository": { "type": "git", "url": "git://github.com/ajlopez/SimpleQueue.git" }
 , "main": "./lib/simplequeue.js"
@@ -10,7 +10,7 @@
     "test": "nodeunit test"
   }
 , "dependencies": {
-	"simpleremote": "*"
+	"simpleremote": "0.0.1"
   }
 , "devDependencies": {
     "nodeunit": ">= 0.7.4"

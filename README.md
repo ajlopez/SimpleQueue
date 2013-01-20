@@ -96,15 +96,15 @@ client.on('remote', function(server) {
 
 });
 
-var server = simplequeue.createRemoteServer(localserver);
-server.listen(3000);
+client.connect(port, host);
+
 ```
 
 ## Development
 
 ```
-git clone git://github.com/ajlopez/SimpleMessages.git
-cd SimpleMessages
+git clone git://github.com/ajlopez/SimpleQueue.git
+cd SimpleQueue
 npm install
 npm test
 ```
