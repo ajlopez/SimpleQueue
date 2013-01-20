@@ -21,29 +21,37 @@ var simplequeue = require('simplequeue');
 Create queue, put and get message:
 
 ```js
-var simplequeue = require('simplequeue');
-var Queue = simplequeue.Queue;
-var Message = simplequeue.Message;
+var sq = require('simplequeue');
 
 // ....
 
-var queue = new Queue();
-var message = new Message('my data'); // it could be an object
-
-queue.putMessage(message);
+var queue = sq.createQueue();
+queue.putMessage('my data');
 
 // ....
 
-var newmessage = queue.getMessage(); // null if no message
+var newmessage = queue.getMessageSync(); // null if no message
 
-// now, newmessage.payload contains 'my daya'
+// now, newmessage contains 'my daya'
+
+// put another message
+
+queue.putMessage('my new data');
+
+// ....
+
+// get the message with a callback
+
+queue.getMessage(function (err, msg) {
+    // now msg contains 'my new data'
+});
 
 ```
 
 There is a local Queue Server
 ```js
-var simplequeue = require('simplequeue');
-var server = new simplequeue.QueueServer();
+var sq = require('simplequeue');
+var server = new sq.createQueueServer();
 ```
 
 Then, you can create a Queue by name
@@ -62,21 +70,21 @@ If the queue doesn't exist, null is returned.
 
 Server side:
 ```js
-var localserver = new simplequeue.QueueServer();
+var localserver = sq.createQueueServer();
 
-var server = simplequeue.createRemoteServer(localserver);
+var server = sq.createRemoteServer(localserver);
 server.listen(3000);
 ```
 
 If you don't need a reference to the local server, it can be omitted:
 ```js
-var server = simplequeue.createRemoteServer();
+var server = sq.createRemoteServer();
 server.listen(3000);
 ```
 
 Client side:
 ```js
-var client = simplequeue.createRemoteClient();
+var client = sq.createRemoteClient();
 
 client.on('remote', function(server) {
     server.getQueue('myqueue', function(err, queue) {
@@ -88,8 +96,9 @@ client.on('remote', function(server) {
         queue.putMessage(new simplequeue.Message('my data'));
         
         // or you can get a message with a callback
+        // in current version, the call is still named 'getMessageSync'
         
-        queue.getMessage(function(err, msg) {
+        queue.getMessageSync(function(err, msg) {
             // ...
         });
     });
@@ -119,7 +128,8 @@ Using a central queue server from distributed producers and consumers.
 ## Versions
 
 - 0.0.1: Published.
-- 0.0.2: Under development, in master.
+- 0.0.2: Under development, in master. More factory methods exposed, instead of direct 'classes'. It use a new
+version of SimpleRemote.
 
 ## Contribution
 
