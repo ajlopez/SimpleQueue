@@ -1,68 +1,65 @@
 
-var simplequeue = require('../');
-var Queue = simplequeue.Queue;
-var Message = simplequeue.Message;
+var sq = require('..');
 
 exports['Get null Message from empty Queue']= function(test) {
-    var queue = new Queue();    
+    var queue = sq.createQueue();    
     
     test.equal(queue.getMessage(), null);
     test.done();
 }
 
 exports['Put Message in Queue']= function(test) {
-    var queue = new Queue();        
+    var queue = sq.createQueue();        
     
-    queue.putMessage(new Message("foo"));
+    queue.putMessage("foo");
     test.done();
 }
 
 exports['Put ang get Message from Queue']= function(test) {
-    var queue = new Queue();        
+    var queue = sq.createQueue();        
     
-    queue.putMessage(new Message("foo"));
+    queue.putMessage("foo");
     var msg = queue.getMessage();
     
     test.ok(msg);
-    test.ok(msg.payload);
-    test.equal(msg.payload, "foo");
+    test.equal(msg, "foo");
     test.done();
 }
 
 exports['Put and get two Messages from Queue']= function(test) {
-    var queue = new Queue();        
+    var queue = sq.createQueue();        
     
-    queue.putMessage(new Message("foo"));
-    queue.putMessage(new Message("bar"));
+    queue.putMessage("foo");
+    queue.putMessage("bar");
     
     var msg1 = queue.getMessage();
     var msg2 = queue.getMessage();
     
     test.ok(msg1);
-    test.equal(msg1.payload, "foo");
+    test.equal(msg1, "foo");
     test.ok(msg2);
-    test.equal(msg2.payload, "bar");
+    test.equal(msg2, "bar");
     
     test.done();
 }
 
+/*
 exports['Consume Queue']= function(test) {
     test.expect(7);
     
-    var queue = new Queue();        
+    var queue = sq.createQueue();        
     
-    queue.putMessage(new Message(1));
-    queue.putMessage(new Message(2));
-    queue.putMessage(new Message(3));
+    queue.putMessage(1);
+    queue.putMessage(2);
+    queue.putMessage(3);
     
     var sum = 0;
     
-    simplequeue.consume(queue, function(msg) {
+    sq.consume(queue, function(msg) {
         test.ok(msg);
-        test.ok(msg.payload);
-        sum += msg.payload;
+        sum += msg;
         
-        if (msg.payload != 3)
+        if (msg != 3)
             return true;
             
         test.equal(sum, 6);
@@ -71,4 +68,4 @@ exports['Consume Queue']= function(test) {
         return false;
     });
 }
-
+*/
