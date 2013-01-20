@@ -1,7 +1,5 @@
 
-var simplequeue = require('../..');
-var Queue = simplequeue.Queue;
-var Message = simplequeue.Message;
+var sq = require('../..');
 
 function getRandomInteger(from, to) {
     return from + Math.floor(Math.random()*(to-from));
@@ -13,7 +11,7 @@ function Producer(queue, name) {
     
     this.process = function() {
         console.log(name + ' generates ' + n);
-        var msg = new Message(n);
+        var msg = n;
         n++;
         queue.putMessage(msg);
         setTimeout(self.process, getRandomInteger(500, 1000));
@@ -25,16 +23,16 @@ function Consumer(queue, name) {
     var self = this;
     
     this.process = function() {
-        var msg = queue.getMessage();
+        var msg = queue.getMessageSync();
         
         if (msg != null)
-            console.log(name + ' process ' + msg.payload);
+            console.log(name + ' process ' + msg);
           
         setTimeout(self.process, getRandomInteger(300, 600));
     }
 }
 
-var queue = new Queue();
+var queue = sq.createQueue();
 var producer = new Producer(queue, 'Producer');
 var consumer1 = new Consumer(queue, 'First Consumer');
 var consumer2 = new Consumer(queue, 'Second Consumer');

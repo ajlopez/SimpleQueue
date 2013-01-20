@@ -4,7 +4,7 @@ var sq = require('..');
 exports['Get null Message from empty Queue']= function(test) {
     var queue = sq.createQueue();    
     
-    test.equal(queue.getMessage(), null);
+    test.equal(queue.getMessageSync(), null);
     test.done();
 }
 
@@ -15,25 +15,25 @@ exports['Put Message in Queue']= function(test) {
     test.done();
 }
 
-exports['Put ang get Message from Queue']= function(test) {
+exports['Put and sync get Message from Queue']= function(test) {
     var queue = sq.createQueue();        
     
     queue.putMessage("foo");
-    var msg = queue.getMessage();
+    var msg = queue.getMessageSync();
     
     test.ok(msg);
     test.equal(msg, "foo");
     test.done();
 }
 
-exports['Put and get two Messages from Queue']= function(test) {
+exports['Put and sync get two Messages from Queue']= function(test) {
     var queue = sq.createQueue();        
     
     queue.putMessage("foo");
     queue.putMessage("bar");
     
-    var msg1 = queue.getMessage();
-    var msg2 = queue.getMessage();
+    var msg1 = queue.getMessageSync();
+    var msg2 = queue.getMessageSync();
     
     test.ok(msg1);
     test.equal(msg1, "foo");

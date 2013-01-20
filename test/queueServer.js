@@ -35,7 +35,7 @@ exports['Create Queue and put Message']= function(test) {
     
     var queue = server.createQueue("foo");
     queue.putMessage('bar');    
-    var result = queue.getMessage();
+    var result = queue.getMessageSync();
     
     test.ok(result);
     test.equal(result, 'bar');

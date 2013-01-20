@@ -1,8 +1,7 @@
 
-var simplequeue = require('../..');
-var Message = simplequeue.Message;
+var sq = require('../..');
 
-var client = simplequeue.createRemoteClient();
+var client = sq.createRemoteClient();
 
 function getRandomInteger(from, to) {
     return from + Math.floor(Math.random()*(to-from));
@@ -13,12 +12,12 @@ function Consumer(queue) {
     var self = this;
     
     this.process = function() {
-        queue.getMessage(function (err, msg) {
+        queue.getMessageSync(function (err, msg) {
             if (err) {
                 console.log(err);
             }
             else if (msg != null) {
-                console.log('Processing ' + msg.payload);
+                console.log('Processing ' + msg);
             }
             
             setTimeout(self.process, getRandomInteger(500, 1000));

@@ -6,7 +6,9 @@ exports['Create Queue']= function(test) {
     var server = sq.createQueueServer();    
     var remoteserver = sq.createRemoteServer(server);
     remoteserver.listen(3000);
+
     var client = sq.createRemoteClient();
+
     client.on('remote', function(remote) {
         remote.createQueue('foo', function(err, result) {
             test.equal(err, undefined);
@@ -37,7 +39,7 @@ exports['Get Message']= function(test) {
             test.equal(err, undefined);
             test.ok(queue);
             
-            queue.getMessage(function (err, msg) {
+            queue.getMessageSync(function (err, msg) {
                 test.equal(err, undefined);
                 test.ok(msg);
                 test.equal(msg, 'foo');
@@ -67,11 +69,11 @@ exports['Get Message and Null']= function(test) {
             test.equal(err, undefined);
             test.ok(queue);
             
-            queue.getMessage(function (err, msg) {
+            queue.getMessageSync(function (err, msg) {
                 test.equal(err, undefined);
                 test.ok(msg);
                 test.equal(msg, 'foo');
-                queue.getMessage(function (err, msg) {
+                queue.getMessageSync(function (err, msg) {
                     test.equal(err, undefined);
                     test.equal(msg, null);
                     client.end();
@@ -149,7 +151,7 @@ exports['Get null Message from empty Queue']= function(test) {
             test.equal(err, undefined);
             test.ok(queue);
             
-            queue.getMessage(function (err, msg) {
+            queue.getMessageSync(function (err, msg) {
                 test.equal(err, undefined);
                 test.equal(msg, null);
                 client.end();
@@ -177,10 +179,10 @@ exports['Get two null Messages from empty Queue']= function(test) {
             test.equal(err, undefined);
             test.ok(queue);
             
-            queue.getMessage(function (err, msg) {
+            queue.getMessageSync(function (err, msg) {
                 test.equal(err, undefined);
                 test.equal(msg, null);
-                queue.getMessage(function (err, msg) {
+                queue.getMessageSync(function (err, msg) {
                     test.equal(err, undefined);
                     test.equal(msg, null);
                     client.end();

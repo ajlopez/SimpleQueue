@@ -1,8 +1,7 @@
 
-var simplequeue = require('../..');
-var Message = simplequeue.Message;
+var sq = require('../..');
 
-var client = simplequeue.createRemoteClient();
+var client = sq.createRemoteClient();
 
 function getRandomInteger(from, to) {
     return from + Math.floor(Math.random()*(to-from));
@@ -14,7 +13,7 @@ function Producer(queue) {
     
     this.process = function() {
         console.log('Generates ' + n);
-        var msg = new Message(n);
+        var msg = n;
         n++;
         queue.putMessage(msg);
         setTimeout(self.process, getRandomInteger(500, 1000));
