@@ -12,7 +12,7 @@ function Consumer(queue) {
     var self = this;
     
     this.process = function() {
-        queue.getMessageSync(function (err, msg) {
+        queue.getMessage(function (err, msg) {
             if (err) {
                 console.log(err);
             }

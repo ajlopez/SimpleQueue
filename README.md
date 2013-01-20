@@ -96,9 +96,8 @@ client.on('remote', function(server) {
         queue.putMessage(new simplequeue.Message('my data'));
         
         // or you can get a message with a callback
-        // in current version, the call is still named 'getMessageSync'
         
-        queue.getMessageSync(function(err, msg) {
+        queue.getMessage(function(err, msg) {
             // ...
         });
     });
@@ -128,8 +127,9 @@ Using a central queue server from distributed producers and consumers.
 ## Versions
 
 - 0.0.1: Published.
-- 0.0.2: Under development, in master. More factory methods exposed, instead of direct 'classes'. It use a new
-version of SimpleRemote.
+- 0.0.2: Published. 
+More factory methods exposed, instead of direct 'classes'. 
+It uses a new version of SimpleRemote (0.0.3)
 
 ## Contribution
 
