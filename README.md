@@ -114,6 +114,10 @@ npm test
 [Local Producer and Consumers](https://github.com/ajlopez/SimpleQueue/tree/master/samples/ProducerConsumer) sample shows
 how to launch one producer and two consumers sharing a queue.
 
+## Versions
+
+- 0.0.1: Published.
+
 ## Contribution
 
 Feel free to [file issues](https://github.com/ajlopez/SimpleQueues) and submit
