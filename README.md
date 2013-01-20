@@ -111,9 +111,9 @@ npm test
 
 ## Samples
 
-[Local Producer and Consumers](https://github.com/ajlopez/SimpleQueue/tree/master/samples/ProducerConsumer)
+- [Local Producer and Consumers](https://github.com/ajlopez/SimpleQueue/tree/master/samples/ProducerConsumer)
 Sample demostrating how to launch one producer and two consumers sharing a queue.
-[Distributed Producers and Consumers](https://github.com/ajlopez/SimpleQueue/tree/master/samples/DistributedProducerConsumer)
+- [Distributed Producers and Consumers](https://github.com/ajlopez/SimpleQueue/tree/master/samples/DistributedProducerConsumer)
 Using a central queue server from distributed producers and consumers.
 
 ## Versions
