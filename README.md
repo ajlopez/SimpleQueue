@@ -131,6 +131,7 @@ Using a central queue server from distributed producers and consumers.
 More factory methods exposed, instead of direct 'classes'. 
 It uses a new version of SimpleRemote (0.0.3)
 - 0.0.3: Published. Engine range update; it uses SimpleRemote 0.0.4
+- 0.0.4: Published. Using SimpleRemote 0.0.5
 
 ## Contribution
 
