@@ -11,7 +11,7 @@ exports['Create Queue']= function(test) {
 
     client.on('remote', function(remote) {
         remote.createQueue('foo', function(err, result) {
-            test.equal(err, undefined);
+            test.ok(!err);
             test.ok(result);
             test.ok(server.getQueue('foo'));
             client.end();
@@ -36,7 +36,7 @@ exports['Get Message']= function(test) {
     
     client.on('remote', function(remote) {
         remote.getQueue('queue', function(err, queue) {
-            test.equal(err, undefined);
+            test.ok(!err);
             test.ok(queue);
             
             queue.getMessage(function (err, msg) {
