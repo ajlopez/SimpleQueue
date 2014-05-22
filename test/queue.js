@@ -50,17 +50,6 @@ exports['Get and Put Message']= function(test) {
     queue.putMessage("foo");
 }
 
-exports['On and Put Message']= function(test) {
-    var queue = sq.createQueue();        
-
-    queue.onMessage(function (msg) {
-        test.ok(msg);
-        test.equal(msg, "foo");
-        test.done();
-    });    
-
-    queue.putMessage("foo");
-}
 
 exports['Put and sync get two Messages']= function(test) {
     var queue = sq.createQueue();        
@@ -97,30 +86,6 @@ exports['Put and Async Get Two Messages']= function(test) {
     });
 }
 
-exports['Put and Async On Two Messages']= function(test) {
-    var queue = sq.createQueue();        
-    
-    queue.putMessage("foo");
-    queue.putMessage("bar");
-    
-    var count = 0;
-    
-    queue.onMessage(function (msg) {
-        test.ok(msg);
-        
-        if (count == 0)
-            test.equal(msg, "foo");
-        else
-            test.equal(msg, "bar");
-            
-        count++;
-        
-        if (count > 1)
-            test.done();
-    });
-
-}
-
 exports['Async Get and Put Two Messages']= function(test) {
     var queue = sq.createQueue();        
     
@@ -133,29 +98,6 @@ exports['Async Get and Put Two Messages']= function(test) {
         test.ok(msg);
         test.equal(msg, "bar");
         test.done();
-    });
-    
-    queue.putMessage("foo");
-    queue.putMessage("bar");
-}
-
-exports['Async On and Put Two Messages']= function(test) {
-    var queue = sq.createQueue();        
-    
-    var count = 0;
-    
-    queue.onMessage(function (msg) {
-        test.ok(msg);
-        
-        if (count == 0)
-            test.equal(msg, "foo");
-        else
-            test.equal(msg, "bar");
-            
-        count++;
-        
-        if (count > 1)
-            test.done();
     });
     
     queue.putMessage("foo");
