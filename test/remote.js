@@ -2,7 +2,7 @@
 var sq = require('../');
 
 exports['Create Queue']= function(test) {
-    test.expect(3);
+    test.async();
     var server = sq.createQueueServer();    
     var remoteserver = sq.createRemoteServer(server);
     remoteserver.listen(3000);
@@ -24,7 +24,7 @@ exports['Create Queue']= function(test) {
 }
 
 exports['Get Message']= function(test) {
-    test.expect(5);
+    test.async();
     var server = sq.createQueueServer();    
     var queue = server.createQueue('queue');
     queue.putMessage('foo');
@@ -54,7 +54,7 @@ exports['Get Message']= function(test) {
 }
 
 exports['Get Message and Get Sync Null']= function(test) {
-    test.expect(7);
+    test.async();
     var server = sq.createQueueServer();    
     var queue = server.createQueue('queue');
     queue.putMessage('foo');
@@ -88,7 +88,7 @@ exports['Get Message and Get Sync Null']= function(test) {
 }
 
 exports['Get null Message from empty Queue']= function(test) {
-    test.expect(4);
+    test.async();
     var server = sq.createQueueServer();    
     var queue = server.createQueue('queue');
     
@@ -116,7 +116,7 @@ exports['Get null Message from empty Queue']= function(test) {
 }
 
 exports['Get two null Messages from empty Queue']= function(test) {
-    test.expect(6);
+    test.async();
     var server = sq.createQueueServer();    
     var queue = server.createQueue('queue');
     
